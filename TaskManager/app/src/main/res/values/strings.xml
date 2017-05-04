@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Task Manager</string>
+    <string name="new_task">Novi zadatak</string>
+    <string name="stats">Statistika</string>
+    <string name="new_task_name">Ime zadatka</string>
+    <string name="description">Opis zadatka</string>
+    <string name="time_date">Vreme i datum</string>
+    <string name="check_box">Podseti me 15 minuta pre isteka</string>
+    <string name="add">Dodaj</string>
+    <string name="cancel">Otkazi</string>
+    <string name="time">Vreme</string>
+    <string name="date">Datum</string>
+    <string name="result">result</string>
+    <string name="sacuvaj">Sacuvaj</string>
+    <string name="obrisi">Obrisi</string>
+
+
+</resources>

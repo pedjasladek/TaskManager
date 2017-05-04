@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:longClickable="true"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:background="@color/red"
+        android:id="@+id/colorBtn"
+        android:layout_height="match_parent"
+        android:clickable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="@string/new_task"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:id="@+id/name_text"
+        android:layout_toRightOf="@id/colorBtn"
+        android:paddingLeft="10dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_height="40dp"
+        android:text="@string/time_date"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:id="@+id/edit"
+        android:layout_above="@+id/checkBoxElem"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:clickable="false"
+        android:id="@+id/checkBoxElem"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:id="@+id/urgBtn"
+        android:clickable="false"
+        android:layout_toLeftOf="@id/checkBoxElem"/>
+
+</RelativeLayout>
