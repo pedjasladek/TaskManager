@@ -13,6 +13,10 @@
     <string name="result">result</string>
     <string name="sacuvaj">Sacuvaj</string>
     <string name="obrisi">Obrisi</string>
+    <string name="visokog">Zadaci visokog</string>
+    <string name="srednjeg">Zadaci srednjeg</string>
+    <string name="niskog">Zadaci niskog</string>
+    <string name="prioriteta">prioriteta</string>
 
 
 </resources>

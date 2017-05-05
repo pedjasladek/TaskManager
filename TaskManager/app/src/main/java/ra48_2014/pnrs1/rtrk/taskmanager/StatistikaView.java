@@ -38,20 +38,22 @@ public class StatistikaView extends View {
     private String yellowPerc;
     private String greenPerc;
 
-    Animation animation = new Animation();
+    private String highTxt;
+    private String mediumTxt;
+    private String lowTxt;
+    private String allTxt;
 
-    private final String highTxt = "Zadaci visokog";
-    private final String mediumTxt = "Zadaci srednjeg";
-    private final String lowTxt = "Zadaci niskog";
-    private final String allTxt = "prioriteta";
+    Animation animation = new Animation();
 
     public StatistikaView(Context context) {
         super(context);
         mPaint = new Paint();
         animation.execute();
+        highTxt = getContext().getString(R.string.visokog);
+        mediumTxt = getContext().getString(R.string.srednjeg);
+        lowTxt = getContext().getString(R.string.niskog);
+        allTxt = getContext().getString(R.string.prioriteta);
     }
-
-
 
     @Override
     protected void onDraw(Canvas canvas) {
