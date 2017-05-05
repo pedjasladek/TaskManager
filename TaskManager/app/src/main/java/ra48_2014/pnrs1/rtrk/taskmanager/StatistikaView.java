@@ -14,8 +14,6 @@ import android.view.View;
 
 public class StatistikaView extends View {
 
-
-
     private Paint mPaint;
 
     /* Rectangle shapes for circles */
@@ -40,7 +38,7 @@ public class StatistikaView extends View {
     private String yellowPerc;
     private String greenPerc;
 
-    private Animation animation = new Animation();
+    Animation animation = new Animation();
 
     private final String highTxt = "Zadaci visokog";
     private final String mediumTxt = "Zadaci srednjeg";
@@ -57,6 +55,7 @@ public class StatistikaView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+
         super.onDraw(canvas);
 
         /* Red circle coordinates */
@@ -66,10 +65,14 @@ public class StatistikaView extends View {
         float rightRed = canvas.getWidth() * 2/3;
         float bottomRed = canvas.getHeight() * 3 / 10;
 
+        /* Green circle coordinates */
+
         float leftGreen = canvas.getWidth() / 12;
         float topGreen = canvas.getHeight() * 1/2;
         float rightGreen = canvas.getWidth() * 5 / 12;
         float bottomGreen = canvas.getHeight() * 7 / 10;
+
+        /* Yellow circle coordinates */
 
         float leftYellow = canvas.getWidth() * 7 / 12;
         float topYellow = canvas.getHeight() * 1/2;
@@ -139,7 +142,12 @@ public class StatistikaView extends View {
 
     }
 
-    private class Animation extends AsyncTask<Void, Void, Void> {
+    public class Animation extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -155,14 +163,15 @@ public class StatistikaView extends View {
                     if (greenDrawnPerc < greenFinalPerc)
                         greenDrawnPerc++;
 
-
                     redPerc = Integer.toString(redDrawnPerc) + "%";
                     yellowPerc = Integer.toString(yellowDrawnPerc) + "%";
                     greenPerc = Integer.toString(greenDrawnPerc) + "%";
 
                     postInvalidate();
-                    SystemClock.sleep(50);
+                    SystemClock.sleep(25);
 
+                    if(isCancelled())
+                        break;
                 }
             return null;
 

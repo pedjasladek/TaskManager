@@ -126,8 +126,6 @@ public class NoviZadatakActivity extends AppCompatActivity{
                         setResult(Activity.RESULT_OK, i);
                         finish();
 
-                        //proceedOnMainActivity();
-                        //toastAdd();
                     } else {
                         toastEmpty();
                     }

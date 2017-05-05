@@ -5,7 +5,17 @@
     tools:context="ra48_2014.pnrs1.rtrk.taskmanager.StatistikaActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center">
+    android:id="@+id/statistika_layout">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nazad"
+            android:textAllCaps="false"
+            android:id="@+id/btnBack"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            />
+
 
 </RelativeLayout>
