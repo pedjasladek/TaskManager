@@ -1,5 +1,6 @@
 package ra48_2014.pnrs1.rtrk.taskmanager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +45,7 @@ public class StatistikaActivity extends AppCompatActivity{
 
     public void proceedOnMainActivity() {
         Intent intent = new Intent(StatistikaActivity.this, MainActivity.class);
-        startActivity(intent);
+        setResult(Activity.RESULT_OK, intent);
         finish();
     }
 }

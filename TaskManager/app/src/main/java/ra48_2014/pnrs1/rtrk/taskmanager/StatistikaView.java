@@ -154,27 +154,27 @@ public class StatistikaView extends View {
         @Override
         protected Void doInBackground(Void... params) {
 
-                while (redDrawnPerc < redFinalPerc || yellowDrawnPerc < yellowFinalPerc || greenDrawnPerc < greenFinalPerc) {
+            while (redDrawnPerc < redFinalPerc || yellowDrawnPerc < yellowFinalPerc || greenDrawnPerc < greenFinalPerc) {
 
-                    if (redDrawnPerc < redFinalPerc)
-                        redDrawnPerc++;
+                if (redDrawnPerc < redFinalPerc)
+                    redDrawnPerc++;
 
-                    if (yellowDrawnPerc < yellowFinalPerc)
-                        yellowDrawnPerc++;
+                if (yellowDrawnPerc < yellowFinalPerc)
+                    yellowDrawnPerc++;
 
-                    if (greenDrawnPerc < greenFinalPerc)
-                        greenDrawnPerc++;
+                if (greenDrawnPerc < greenFinalPerc)
+                    greenDrawnPerc++;
 
-                    redPerc = Integer.toString(redDrawnPerc) + "%";
-                    yellowPerc = Integer.toString(yellowDrawnPerc) + "%";
-                    greenPerc = Integer.toString(greenDrawnPerc) + "%";
+                redPerc = Integer.toString(redDrawnPerc) + "%";
+                yellowPerc = Integer.toString(yellowDrawnPerc) + "%";
+                greenPerc = Integer.toString(greenDrawnPerc) + "%";
 
-                    postInvalidate();
-                    SystemClock.sleep(25);
+                postInvalidate();
+                SystemClock.sleep(25);
 
-                    if(isCancelled())
-                        break;
-                }
+                if(isCancelled())
+                    break;
+            }
             return null;
 
         }
