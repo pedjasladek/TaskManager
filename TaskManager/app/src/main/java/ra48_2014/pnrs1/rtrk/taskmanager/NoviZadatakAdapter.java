@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.Date;
 public class NoviZadatakAdapter extends BaseAdapter {
 
     private Context mContext;
-    private ArrayList<NoviZadatak> taskList;
+    private static ArrayList<NoviZadatak> taskList;
 
     private Date date;
     private Calendar tmpCal;
@@ -37,6 +38,9 @@ public class NoviZadatakAdapter extends BaseAdapter {
     public void addTask(NoviZadatak task) {
         taskList.add(task);
         notifyDataSetChanged();
+    }
+    public static ArrayList<NoviZadatak> getList(){
+        return taskList;
     }
 
     @Override
@@ -82,8 +86,8 @@ public class NoviZadatakAdapter extends BaseAdapter {
         tmpCal1 = Calendar.getInstance();
         tmpCal2 = Calendar.getInstance();
 
-        NoviZadatak task = (NoviZadatak) getItem(position);
-        ViewHolder holder = (ViewHolder) view.getTag();
+        final NoviZadatak task = (NoviZadatak) getItem(position);
+        final ViewHolder holder = (ViewHolder) view.getTag();
 
         holder.name.setText(task.getName());
         tmpCal = task.getCalendar();
@@ -139,11 +143,22 @@ public class NoviZadatakAdapter extends BaseAdapter {
                     + ":" + tmpCal.get(Calendar.MINUTE) + "");
         }
 
+
+
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    task.setFinished(true);
+                } else {
+                    holder.name.setPaintFlags(holder.name.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+                    task.setFinished(false);
+                }
+            }
+        });
+
         holder.checkBox.setChecked(task.getFinished());
-
-        if (task.getFinished())
-            holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
         return view;
     }
 

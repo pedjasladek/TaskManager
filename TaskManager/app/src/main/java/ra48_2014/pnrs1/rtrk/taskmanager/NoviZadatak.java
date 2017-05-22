@@ -42,36 +42,36 @@ public class NoviZadatak implements Serializable {
         return name;
     }
 
-    public void setName() { this.name = name; }
+    public void setName(String name) { this.name = name; }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription() { this.description = description; }
+    public void setDescription(String description) { this.description = description; }
 
     public int getPriority() {
         return priority;
     }
 
-    public void setPriority() { this.priority = priority; }
+    public void setPriority(int priority) { this.priority = priority; }
 
     public Calendar getCalendar() {
         return calendar;
     }
 
-    public void setCalendar() { this.calendar = calendar; }
+    public void setCalendar(Calendar calendar) { this.calendar = calendar; }
 
     public boolean getReminder() {
         return reminder;
     }
 
-    public void setReminder() { this.reminder = reminder; }
+    public void setReminder(boolean reminder) { this.reminder = reminder; }
 
     public boolean getFinished() {
         return finished;
     }
 
-    public void setFinished() { this.finished = finished; }
+    public void setFinished(boolean finished) { this.finished = finished; }
 
 }
