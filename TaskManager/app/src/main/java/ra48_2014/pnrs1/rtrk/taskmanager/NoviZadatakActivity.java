@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.util.Log;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,16 +50,23 @@ public class NoviZadatakActivity extends AppCompatActivity{
     private boolean flag2 = false;
     private boolean edit = false;
     private boolean finished = false;
+    private boolean reminder;
 
     private int priority;
 
     private NoviZadatak task;
+
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_novi_zadatak);
+
+        db = new DatabaseHelper(this);
+
+        Log.d("Novi zadatak usao", "Novi zadatak activity napravljen");
 
         store_time_date = Calendar.getInstance();
         temp = Calendar.getInstance();
@@ -75,6 +83,8 @@ public class NoviZadatakActivity extends AppCompatActivity{
         date_txt = (TextView) findViewById(R.id.date_txt);
         check_box = (CheckBox) findViewById(R.id.check_box);
 
+        Log.d("Naduvaj se kite", "Napravio getter-e");
+
         intent = getIntent();
         if (intent.hasExtra("edit")) {
 
@@ -83,6 +93,7 @@ public class NoviZadatakActivity extends AppCompatActivity{
             add_btn.setText(R.string.sacuvaj);
             cancel_btn.setText(R.string.obrisi);
             name_txt.setText(task.getName());
+            calendar = task.getCalendar();
             description_txt.setText(task.getDescription());
             store_time_date = task.getCalendar();
             date_txt.setText(store_time_date.get(Calendar.DAY_OF_MONTH) + ""
@@ -97,31 +108,35 @@ public class NoviZadatakActivity extends AppCompatActivity{
                 case 1:
                     green_btn.setEnabled(false);
                     yellow_btn.setEnabled(false);
+                    priority = 1;
                     break;
                 case 2:
                     red_btn.setEnabled(false);
                     green_btn.setEnabled(false);
+                    priority = 2;
                     break;
                 case 3:
                     red_btn.setEnabled(false);
                     yellow_btn.setEnabled(false);
+                    priority = 3;
                     break;
             }
         } else {
             edit = false;
         }
 
-         /* Called when the user presses "Dodaj" button */
+         /* Called when the user presses "Dodaj" button or "Sacuvaj" */
 
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!edit) {
+                if (!edit) {
                     if (flag && flag1 && flag2 && !name_txt.getText().toString().isEmpty() && !description_txt.getText().toString().isEmpty()) {
                         finished = (store_time_date.getTimeInMillis() < temp.getTimeInMillis()) ? true : false;
                         task = new NoviZadatak(name_txt.getText().toString(), description_txt.getText().toString(), check_box.isChecked(), finished, priority, store_time_date);
 
                         Intent i = new Intent(NoviZadatakActivity.this, MainActivity.class);
+
                         i.putExtra(getResources().getString(R.string.result), task);
                         setResult(Activity.RESULT_OK, i);
                         finish();
@@ -129,17 +144,36 @@ public class NoviZadatakActivity extends AppCompatActivity{
                     } else {
                         toastEmpty();
                     }
+                } else {
+
+                        finished = (store_time_date.getTimeInMillis() < temp.getTimeInMillis()) ? true : false;
+                        reminder = (check_box.isChecked()) ? true : false;
+
+                        db.Update(task, name_txt.getText().toString(), description_txt.getText().toString(), calendar, priority, finished, reminder);
+
+                        Intent i = new Intent(NoviZadatakActivity.this, MainActivity.class);
+                        setResult(Activity.RESULT_OK, i);
+
+                        finish();
                 }
             }
         });
 
-        /* Called when the user presses "Otkazi" button */
+        /* Called when the user presses "Otkazi" button or "Obrisi" */
 
         cancel_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!edit) {
                     toastCancel();
+                    finish();
+                }else{
+
+                    db.Delete(task.getName());
+
+                    Intent i = new Intent(getBaseContext(), MainActivity.class);
+                    setResult(Activity.RESULT_OK, i);
+
                     finish();
                 }
             }

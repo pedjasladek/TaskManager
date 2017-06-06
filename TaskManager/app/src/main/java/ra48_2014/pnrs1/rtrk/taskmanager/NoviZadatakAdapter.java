@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,16 +23,18 @@ import java.util.Date;
 public class NoviZadatakAdapter extends BaseAdapter {
 
     private Context mContext;
-    private static ArrayList<NoviZadatak> taskList;
+    private static ArrayList<NoviZadatak> taskList = new ArrayList<>();
 
     private Date date;
     private Calendar tmpCal;
     private Calendar tmpCal1;
     private Calendar tmpCal2;
+    private DatabaseHelper db;
 
     /* Constructor */
 
     public NoviZadatakAdapter(Context context) {
+        db = new DatabaseHelper(context);
         this.mContext = context;
         taskList = new ArrayList<NoviZadatak>();
     }
@@ -64,6 +67,17 @@ public class NoviZadatakAdapter extends BaseAdapter {
         return position;
     }
 
+    public void update(NoviZadatak[] tasks) {
+        taskList.clear();
+        if(tasks != null) {
+            for(NoviZadatak task : tasks) {
+                taskList.add(task);
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -94,6 +108,10 @@ public class NoviZadatakAdapter extends BaseAdapter {
         date = task.getCalendar().getTime();
         tmpCal1.add(Calendar.DAY_OF_YEAR, 1);
         tmpCal2.add(Calendar.DAY_OF_YEAR, 7);
+
+        if(tmpCal.getTimeInMillis() < Calendar.getInstance().getTimeInMillis()){
+            task.setFinished(true);
+        }
 
         if (task.getPriority() == 1) {
             holder.urg.setBackgroundColor(mContext.getResources().getColor(R.color.red));
@@ -151,9 +169,11 @@ public class NoviZadatakAdapter extends BaseAdapter {
                 if (isChecked) {
                     holder.name.setPaintFlags(holder.name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     task.setFinished(true);
+                    db.Update(task, task.getName().toString(), task.getDescription().toString(),task.getCalendar(),task.getPriority(),task.getFinished(),task.getReminder());
                 } else {
                     holder.name.setPaintFlags(holder.name.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
                     task.setFinished(false);
+                    db.Update(task, task.getName().toString(), task.getDescription().toString(),task.getCalendar(),task.getPriority(),task.getFinished(),task.getReminder());
                 }
             }
         });

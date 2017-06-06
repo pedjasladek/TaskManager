@@ -16,15 +16,6 @@ public class NoviZadatak implements Serializable {
     private boolean finished;
     private int priority;
 
-    public NoviZadatak() {
-        name = "";
-        description = "";
-        priority = -1;
-        calendar = Calendar.getInstance();
-        reminder = false;
-        finished = false;
-    }
-
     /* Constructor */
 
     public NoviZadatak(String name, String description, boolean reminder, boolean finished, int priority, Calendar calendar) {

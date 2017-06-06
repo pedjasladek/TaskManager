@@ -24,9 +24,9 @@ public class StatistikaView extends View {
 
     /* Final and start percentage */
 
-    private int redFinalPerc = 68;
-    private int greenFinalPerc = 90;
-    private int yellowFinalPerc = 30;
+    private int redFinalPerc = 0;
+    private int greenFinalPerc = 0;
+    private int yellowFinalPerc = 0;
 
     private int redDrawnPerc = 0;
     private int greenDrawnPerc = 0;
@@ -34,9 +34,9 @@ public class StatistikaView extends View {
 
     /* Strings for viewing percentage in txt form */
 
-    private String redPerc;
-    private String yellowPerc;
-    private String greenPerc;
+    private String redPerc = "0%";
+    private String yellowPerc = "0%";
+    private String greenPerc = "0%";
 
     private String highTxt;
     private String mediumTxt;
@@ -45,7 +45,7 @@ public class StatistikaView extends View {
 
     Animation animation = new Animation();
 
-    public StatistikaView(Context context) {
+    public StatistikaView(Context context, int RedPercentage, int YellowPercentage, int GreenPercentage) {
         super(context);
         mPaint = new Paint();
         animation.execute();
@@ -53,6 +53,22 @@ public class StatistikaView extends View {
         mediumTxt = getContext().getString(R.string.srednjeg);
         lowTxt = getContext().getString(R.string.niskog);
         allTxt = getContext().getString(R.string.prioriteta);
+
+        redFinalPerc = RedPercentage;
+        greenFinalPerc = YellowPercentage;
+        yellowFinalPerc = GreenPercentage;
+
+        if(greenFinalPerc < 1){
+            greenFinalPerc = 0;
+        }
+
+        if(redFinalPerc < 1){
+            redFinalPerc = 0;
+        }
+        if(yellowFinalPerc < 1){
+            yellowFinalPerc = 0;
+        }
+
     }
 
     @Override
