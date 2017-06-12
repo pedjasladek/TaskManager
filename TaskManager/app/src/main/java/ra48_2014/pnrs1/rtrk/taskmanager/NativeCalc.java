@@ -1,7 +1,7 @@
 package ra48_2014.pnrs1.rtrk.taskmanager;
 
 /**
- * Created by niketic95 on 12/06/17.
+ * Created by VELIKI on 12/06/17.
  */
 
 public class NativeCalc {
