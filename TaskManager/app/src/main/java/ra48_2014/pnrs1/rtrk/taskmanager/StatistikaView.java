@@ -112,19 +112,19 @@ public class StatistikaView extends View {
         mPaint.setColor(Color.RED);
         canvas.drawArc(redCircle, -90, (float)(redDrawnPerc * 3.6), true, mPaint);
 
-        /* Green circle */
-
-        mPaint.setColor(Color.CYAN);
-        canvas.drawOval(greenCircle, mPaint);
-        mPaint.setColor(Color.GREEN);
-        canvas.drawArc(greenCircle, -90, (float)(greenDrawnPerc * 3.6), true, mPaint);
-
         /* Yellow circle */
 
         mPaint.setColor(Color.CYAN);
         canvas.drawOval(yellowCircle, mPaint);
-        mPaint.setColor(Color.YELLOW);
+        mPaint.setColor(Color.GREEN);
         canvas.drawArc(yellowCircle, -90, (float)(yellowDrawnPerc * 3.6), true, mPaint);
+
+        /* Green circle */
+
+        mPaint.setColor(Color.CYAN);
+        canvas.drawOval(greenCircle, mPaint);
+        mPaint.setColor(Color.YELLOW);
+        canvas.drawArc(greenCircle, -90, (float)(greenDrawnPerc * 3.6), true, mPaint);
 
         /* Setting color and size of text */
 
